@@ -38,7 +38,7 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee saveEmployee(Employee employee) { System.out.println("que pedo " + employee.getId());
+    public Employee saveEmployee(Employee employee) { 
         employeeValidator.validatMandatoryFieldsAndThrowException(employee);
         return employeeRepository.save(employee);
     }
