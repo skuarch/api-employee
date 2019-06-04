@@ -1,6 +1,7 @@
 package app.api.config.controller.advice;
 
 import app.api.config.exeception.EmployeeNotFoundException;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -16,6 +17,12 @@ public class ErrorHandler {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private static final String ERROR = "error: ";
 
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> entityNotFoundException(EntityNotFoundException e) {
+        ExceptionResponse er = new ExceptionResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
+        return new ResponseEntity<>(er, HttpStatus.NOT_FOUND);
+    }
+    
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ExceptionResponse> illegalArgumentException(IllegalArgumentException iae) {
         logger.error(ERROR, iae);
@@ -78,8 +85,9 @@ public class ErrorHandler {
     }
     
     @ExceptionHandler(NumberFormatException.class)
-    public ResponseEntity<ExceptionResponse> numberFormatException(HttpMessageConversionException e) {
+    public ResponseEntity<ExceptionResponse> numberFormatException(NumberFormatException e) {
         ExceptionResponse er = new ExceptionResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage());
         return new ResponseEntity<>(er, HttpStatus.BAD_REQUEST);
     }
+    
 }

@@ -11,6 +11,7 @@ public class CustomEmployeeMapper implements EmployeeMapper {
     public EmployeeDto entityToDto(Employee employee) {
         
         EmployeeDto dto = new EmployeeDto();
+        dto.setId(employee.getId());
         dto.setBirthDate(employee.getBirthDate());
         dto.setEmploymentDate(employee.getEmploymentDate());
         dto.setFirstName(employee.getFirstName());
@@ -32,6 +33,7 @@ public class CustomEmployeeMapper implements EmployeeMapper {
     public Employee dtoToEntity(EmployeeDto employeeDto) {
         
         Employee employee = new Employee();
+        employee.setId(employeeDto.getId());
         employee.setBirthDate(employeeDto.getBirthDate());
         employee.setEmploymentDate(employeeDto.getEmploymentDate());
         employee.setFirstName(employeeDto.getFirstName());

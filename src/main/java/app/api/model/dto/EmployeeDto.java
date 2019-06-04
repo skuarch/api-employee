@@ -15,6 +15,16 @@ public class EmployeeDto {
     public EmployeeDto() {
     }
 
+    public EmployeeDto(Long id, String firstName, String middleInitial, String lastName, String birthDate, String employmentDate, String status) {
+        this.id = id;
+        this.firstName = firstName;
+        this.middleInitial = middleInitial;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.employmentDate = employmentDate;
+        this.status = status;
+    }
+
     @JsonProperty("ID")
     public Long getId() {
         return id;
@@ -56,7 +66,7 @@ public class EmployeeDto {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(String birthDate) {       
         this.birthDate = birthDate;
     }
 

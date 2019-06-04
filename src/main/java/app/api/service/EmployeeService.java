@@ -15,22 +15,19 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private EmployeeValidator employeeValidator;
+
     public Employee getEmployee(Long employeeId) {
-
-        if (exitsEmployee(employeeId)) {
-            return employeeRepository.getOne(employeeId);
-        } else {
-            throw new EmployeeNotFoundException("employee not found");
-        }
-
+        employeeValidator.validateIdAndThrowException(employeeId);
+        exitsEmployee(employeeId);
+        return employeeRepository.getOne(employeeId);
     }
 
     public Boolean exitsEmployee(Long employeeId) {
-
+        employeeValidator.validateIdAndThrowException(employeeId);
         Employee result = employeeRepository.existsEmployee(employeeId);
-        Boolean flag = result != null;
-        return flag;
-
+        return result != null;
     }
 
     public void throwEmployeeNotFound(String message) {
@@ -41,23 +38,18 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee saveEmployee(Employee employee) {
+    public Employee saveEmployee(Employee employee) { System.out.println("que pedo " + employee.getId());
+        employeeValidator.validatMandatoryFieldsAndThrowException(employee);
         return employeeRepository.save(employee);
     }
 
     public Employee updateEmployee(Employee employee) {
-        if (employee.getId() == null || employee.getId() < 1) {
-            throw new IllegalArgumentException("id is null or less than 0");
-        }
+        employeeValidator.validateAllFieldsAndThrowException(employee);
         return employeeRepository.save(employee);
     }
 
     public void inactiveEmployee(Employee employee) {
-
-        if (employee.getId() == null || employee.getId() < 1) {
-            throw new IllegalArgumentException("id is null or less than 0");
-        }
-
+        employeeValidator.validateAllFieldsAndThrowException(employee);
         employee.setStatus(false);
         updateEmployee(employee);
     }

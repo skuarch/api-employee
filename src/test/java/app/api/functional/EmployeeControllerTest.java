@@ -1,4 +1,4 @@
-package app.api.controller;
+package app.api.functional;
 
 import app.api.model.common.EndPoints;
 import org.junit.After;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
+@WithMockUser(username = "admin", password = "admin", roles = "USER")
 public class EmployeeControllerTest {
 
     @Autowired
@@ -49,17 +51,16 @@ public class EmployeeControllerTest {
     }
 
     // positive
-    @Test
+    @Test    
     public void testGetEmployee1() throws Exception {
         this.mockMvc.perform(
                 get(EndPoints.EMPLOYEE + "/1")
                 .accept(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk())
-                .andExpect(content().json("{\"ID\":1,\"FirstName\":\"Kameko\",\"MiddleInitial\":\"Z\",\"LastName\":\"Ulysses\",\"DateOfBirth\":\"1972-09-23\",\"DateOfEmployment\":\"2016-12-07\",\"Status\":\"ACTIVE\"}"));
+                .andExpect(status().isOk());                
     }
 
     // negative
-    @Test
+    @Test    
     public void testGetEmployee2() throws Exception {
         Long employeeId = 100000L;
         this.mockMvc.perform(
@@ -69,7 +70,7 @@ public class EmployeeControllerTest {
     }
 
     // negative
-    @Test
+    @Test    
     public void testGetEmployee3() throws Exception {
         this.mockMvc.perform(
                 get(EndPoints.EMPLOYEE + "/a"))
@@ -78,7 +79,7 @@ public class EmployeeControllerTest {
     }
 
     // negative
-    @Test
+    @Test    
     public void testGetEmployee4() throws Exception {
         this.mockMvc.perform(
                 get(EndPoints.EMPLOYEE + "/2"))
@@ -87,7 +88,7 @@ public class EmployeeControllerTest {
     }
     
     // positive
-    @Test
+    @Test    
     public void testGetEmployeeList() throws Exception {
         this.mockMvc.perform(
                 get(EndPoints.EMPLOYEE)

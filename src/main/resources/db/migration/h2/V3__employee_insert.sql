@@ -1,5 +1,5 @@
 INSERT INTO employee (employee_first_name,employee_middle_initial,employee_last_name,employee_birth_date,employee_employment_date,employee_status) VALUES ('Kameko','Z','Ulysses','1972-09-23','2016-12-07',true);
-INSERT INTO employee (employee_first_name,employee_middle_initial,employee_last_name,employee_birth_date,employee_employment_date,employee_status) VALUES ('Avram','C','Amery','1990-12-29','2019-07-12',false);
+INSERT INTO employee (employee_first_name,employee_middle_initial,employee_last_name,employee_birth_date,employee_employment_date,employee_status) VALUES ('Avram','C','Amery','1990-12-29','2019-07-12',true);
 INSERT INTO employee (employee_first_name,employee_middle_initial,employee_last_name,employee_birth_date,employee_employment_date,employee_status) VALUES ('Carly','U','Henry','1985-10-30','2018-05-05',true);
 INSERT INTO employee (employee_first_name,employee_middle_initial,employee_last_name,employee_birth_date,employee_employment_date,employee_status) VALUES ('Nero','Y','Macon','1972-06-20','2017-02-16',true);
 INSERT INTO employee (employee_first_name,employee_middle_initial,employee_last_name,employee_birth_date,employee_employment_date,employee_status) VALUES ('Abbot','M','Basil','1967-02-20','2015-07-10',true);
